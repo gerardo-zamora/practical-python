@@ -2,6 +2,7 @@
 #
 # Exercise 2.4
 import csv
+import fileparse
 
 def read_portfolio(filename):
     '''Reads portafolio file and returns a list of dictionaries'''
