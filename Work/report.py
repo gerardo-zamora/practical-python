@@ -8,35 +8,15 @@ def read_portfolio(filename):
     '''Reads portafolio file and returns a list of dictionaries'''
     portfolio = []
     
-    with open(filename, 'rt') as file:
-        rows = csv.reader(file)
-        headers = next(rows)
-        
-        for rown, row in enumerate(rows, start=1):
-            record = dict(zip(headers, row))
-            try:
-                record['shares'] = int(record['shares'])
-                record['price'] = float(record['price'])
-                portfolio.append(record)
-            except ValueError:
-                print(f'Could not read row {rown}:', row)
+    portfolio = fileparse.parse_csv(filename, select=['name','shares','price'], types=[str,int,float])
         
     return portfolio
     
 def read_prices(filename):
     '''Reads stock prices from file and returns a dictionary keyed by stock name'''
-    prices = {}
+    pricelist = fileparse.parse_csv(filename, types=[str,float], has_headers=False)
+    prices = { name : price for name,price in pricelist }
     
-    with open(filename, 'rt') as file:
-        rows = csv.reader(file)
-        for rown, row in enumerate(rows, start=1):
-            if len(row) == 2:
-                try:
-                    prices[row[0]] = float(row[1])
-                except ValueError:
-                    print('Could not read row:', row)
-            else:
-                print('Row', rown, 'has missing data or is empty')
     return prices
     
 def make_report(portfolio, prices):
