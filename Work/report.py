@@ -2,6 +2,7 @@
 #
 # Exercise 2.4
 import csv
+import sys
 import fileparse
 
 def read_portfolio(filename):
@@ -49,5 +50,17 @@ def portfolio_report(portfolio_filename, prices_filename):
     report = make_report(portfolio, prices)
     print_report(report)
 
-portfolio_report('Data/portfoliodate.csv','Data/prices.csv')
+def main(argv):
+    # Set defaults
+    portfolio_filename = 'Data/portfoliodate.csv'
+    prices_filename = 'Data/prices.csv'
+    
+    if len(argv) == 3:
+        portfolio_filename = argv[1]
+        prices_filename = argv[2]
+        
+    portfolio_report(portfolio_filename, prices_filename)
+    
+if __name__ == '__main__':
+    main(sys.argv)
 

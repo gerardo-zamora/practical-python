@@ -19,11 +19,15 @@ def portfolio_cost(filename):
             print(f'Could not parse row {rown}:', row)
 
     return total_cost
+    
+def main(argv):
+    if len(argv) == 2:
+        filename = argv[1]
+    else:
+        filename = 'Data/portfolio.csv'
+        
+    cost = portfolio_cost(filename)
+    print(f'Total cost: ${cost}')
 
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    filename = 'Data/portfolio.csv'
-
-cost = portfolio_cost(filename)
-print(f'Total cost: ${cost}')
+if __name__ == '__main__':
+    main(sys.argv)
