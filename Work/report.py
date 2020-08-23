@@ -9,14 +9,16 @@ def read_portfolio(filename):
     '''Reads portafolio file and returns a list of dictionaries'''
     portfolio = []
     
-    portfolio = fileparse.parse_csv(filename, select=['name','shares','price'], types=[str,int,float])
+    with open(filename) as file:
+        portfolio = fileparse.parse_csv(file, select=['name','shares','price'], types=[str,int,float])
         
     return portfolio
     
 def read_prices(filename):
     '''Reads stock prices from file and returns a dictionary keyed by stock name'''
-    pricelist = fileparse.parse_csv(filename, types=[str,float], has_headers=False)
-    prices = { name : price for name,price in pricelist }
+    with open(filename) as file:
+        pricelist = fileparse.parse_csv(file, types=[str,float], has_headers=False)
+        prices = { name : price for name,price in pricelist }
     
     return prices
     
