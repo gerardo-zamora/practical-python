@@ -12,9 +12,9 @@ def portfolio_cost(filename):
     
     portfolio = report.read_portfolio('Data/portfolio.csv')
     
-    for rown, row in enumerate(portfolio, start=1):
+    for rown, s in enumerate(portfolio, start=1):
         try:
-            total_cost = total_cost + (row['shares'] * row['price'])
+            total_cost = total_cost + (s.shares * s.price)
         except ValueError:
             print(f'Could not parse row {rown}:', row)
 

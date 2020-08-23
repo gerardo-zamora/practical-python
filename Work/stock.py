@@ -12,4 +12,4 @@ class Stock:
         self.shares -= amount
         
     def cost(self):
-        print(self.shares * self.price)
+        return self.shares * self.price

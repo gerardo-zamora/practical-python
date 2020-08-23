@@ -4,14 +4,17 @@
 import csv
 import sys
 import fileparse
+from stock import Stock
 
 def read_portfolio(filename):
     '''Reads portafolio file and returns a list of dictionaries'''
-    portfolio = []
+    portdicts = []
     
     with open(filename) as file:
-        portfolio = fileparse.parse_csv(file, select=['name','shares','price'], types=[str,int,float])
-        
+        portdicts = fileparse.parse_csv(file, select=['name','shares','price'], types=[str,int,float])
+    
+    portfolio = [Stock(d['name'], d['shares'], d['price']) for d in portdicts]
+    
     return portfolio
     
 def read_prices(filename):
@@ -28,9 +31,9 @@ def make_report(portfolio, prices):
     total_value = 0.0
     report = []
     
-    for stock in portfolio:
-        change = prices[stock['name']] - stock['price']
-        report.append((stock['name'], stock['shares'], prices[stock['name']], change))
+    for s in portfolio:
+        change = prices[s.name] - s.price
+        report.append((s.name, s.shares, prices[s.name], change))
     
     return report
     
