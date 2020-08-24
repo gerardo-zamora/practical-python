@@ -12,13 +12,13 @@ class Stock:
         self.price = price
 
     def sell(self, amount):
-    '''
-    Sell amount of shares.
-    '''
+        '''
+        Sell amount of shares.
+        '''
         self.shares -= amount
         
     def cost(self):
-    '''
-    Returns the cost of a stock holding.
-    '''
+        '''
+        Returns the cost of a stock holding.
+        '''
         return self.shares * self.price
