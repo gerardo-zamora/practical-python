@@ -14,7 +14,7 @@ def portfolio_cost(filename):
     
     for rown, s in enumerate(portfolio, start=1):
         try:
-            total_cost = total_cost + (s.shares * s.price)
+            total_cost = total_cost + s.cost
         except ValueError:
             print(f'Could not parse row {rown}:', row)
 

@@ -44,14 +44,9 @@ def print_report(report, formatter):
     '''
     # Print headers
     formatter.headings(['Name', 'Shares', 'Price', 'Change'])
-    #headers = ('Name', 'Shares', 'Price', 'Change')
-    #print('%10s %10s %10s %10s' % headers)
-    #print((('-' * 10) + ' ') * len(headers))
+    
     # Print rows
     for name, shares, price, change in report:
-        #price_string = f'${price:0.2f}'
-        #price_string = ' ' * (10-len(price_string)) + price_string
-        #print(f'{name:>10s} {shares:>10d} {price_string} {change:>10.2f}')
         formatter.row([name, str(shares), f'${price:0.2f}', f'{change:0.2f}'])
         
 def portfolio_report(portfolio_filename, prices_filename, format='txt'):
