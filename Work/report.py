@@ -8,16 +8,17 @@ from stock import Stock
 from portfolio import Portfolio
 import tableformat
 
-def read_portfolio(filename):
+def read_portfolio(filename, **opts):
     '''Reads portafolio file and returns a list of dictionaries.'''
     portdicts = []
     
     with open(filename) as file:
         portdicts = fileparse.parse_csv(file,
                                         select=['name','shares','price'],
-                                        types=[str,int,float])
+                                        types=[str,int,float],
+                                        **opts)
     
-    portfolio = [Stock(d['name'], d['shares'], d['price']) for d in portdicts]
+    portfolio = [Stock(**d) for d in portdicts]
     
     return Portfolio(portfolio)
     

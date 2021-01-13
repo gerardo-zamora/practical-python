@@ -16,12 +16,6 @@ def make_dicts(rows, headers):
 def select_columns(rows, indeces):
     for row in rows:
         yield [row[index] for index in indeces]
-    
-
-def filter_symbols(rows, names):
-    for row in rows:
-        if row['name'] in names:
-            yield row
 
 def parse_stock_data(lines, select, headers, types):
     rows = csv.reader(lines)
@@ -39,7 +33,7 @@ def ticker(portfile, logfile, format):
                             [0, 1, 4],
                             headings,
                             [str, float, float])
-    #rows = filter_symbols(rows, portfolio)
+
     rows = (row for row in rows if row['name'] in portfolio)
     
     formatter.headings(headings)
